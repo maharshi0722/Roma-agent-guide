@@ -1,109 +1,115 @@
-# 🚀 Sentient ROMA — Complete Installation Guide
+# 🚀 Sentient ROMA - Installation Guide
 
-**Welcome!**  
-This guide helps you install and run **Sentient ROMA**, the open-source meta-agent framework by **Sentient AGI**.  
+**Sentient ROMA** is an open-source meta-agent framework by **Sentient AGI** that allows multiple lightweight AI agents to collaborate on complex, high-performance tasks.  
 
-ROMA enables multiple intelligent agents to collaborate seamlessly on complex, high-performance tasks — it’s the foundation of Sentient’s multi-agent intelligence system.  
-
-This simplified guide ensures anyone can install and experience ROMA locally.
+This guide walks you through the complete setup - **Ubuntu + Docker + OpenRouter + ROMA** - in one go.
 
 ---
 
-## 🧩 1. Install Ubuntu on Windows
 
-1. Open **Microsoft Store**, search for **“Ubuntu”**, and install it.  
-2. When installation completes, a terminal window opens automatically for updates.  
-3. If prompted, set up your **username** and **password** — you’ll use these for later commands.  
+🧠 Click Here to View Full Installation Steps
 
-> 💡 If Ubuntu doesn’t appear, run these in **PowerShell**:
-```bash
+### 🧩 Step 1 - Install Ubuntu on Windows
+
+1. Open **Microsoft Store**, search for **Ubuntu**, and install it.  
+2. Once done, a terminal window opens automatically for updates.  
+3. Set up your **username** and **password** when prompted.
+
+> 💡 If Ubuntu doesn’t appear in WSL, open **PowerShell** and run:
+```Bash
 wsl --install -d Ubuntu-22.04
 wsl -s Ubuntu-22.04
-🔑 2. Create an OpenRouter Account & API Key
-Visit https://openrouter.ai/
+```
+### 🔑 Step 2 - Create an OpenRouter Account & API Key
 
-Sign in with Google or another provider.
+Go to https://openrouter.ai/
 
-Click the ⚙️ Settings icon → API Keys → Create API Key.
+Sign in with Google (or another provider).
 
-Name your key, click Create, and copy it (starts with sk-).
+Go to ⚙️ Settings → API Keys → Create API Key.
 
-⚠️ You won’t be able to view it again later — store it safely.
+Copy your new API key (starts with sk-).
 
-🐳 3. Install Docker Desktop
-Go to Docker Desktop for Windows.
+⚠️ You can’t see it again after closing the page — save it securely.
 
-Download and install Docker.
+### 🐳 Step 3 - Install Docker Desktop
 
-After setup, open Docker Desktop → click Continue without signing in.
+Download from Docker Desktop for Windows
+.
 
-Wait until you see “Docker Desktop Running” in the bottom-right corner.
+Install and open Docker.
 
-If you get an error, restart Docker and allow it to update.
+Click Continue without signing in.
 
-⚙️ Enable Ubuntu Integration
-In Docker Desktop, open Settings → Resources → WSL Integration.
+Wait until you see “Docker Desktop Running” at the bottom-right.
 
-Enable Ubuntu and click Restart & Apply.
+Enable Ubuntu Integration:
+Open Settings → Resources → WSL Integration
+Turn on Ubuntu
+Click Restart & Apply
 
-🧱 4. Set Up Ubuntu Environment
-Open the Ubuntu 22.04 app and run these commands:
+### 🧱 Step 4 - Set Up Ubuntu Environment
 
-bash
-Copy code
+Open your installed Ubuntu 22.04 app and run:
+```Bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install git docker.io docker-compose -y
-This installs the tools required for ROMA.
+```
 
-🧠 5. Clone and Install ROMA
-bash
-Copy code
+### 🧠 Step 5 - Clone and Install ROMA
+```Bash
 git clone https://github.com/sentient-agi/ROMA.git
 cd ROMA
 ./setup.sh --docker
-The installation will take around 10 minutes.
-Once completed, continue to configuration.
+```
 
-🪄 6. Configure Your API Key
-Link your OpenRouter API key with ROMA:
+⏳ Installation may take around 10 minutes. Wait until it completes.
 
-bash
-Copy code
+### 🔐 Step 6 - Add Your OpenRouter API Key
+
+Replace sk_your_api_key_here below with your actual key:
+```Bash
 cd
 cd ROMA
 sed -i 's/api_key: "your-openrouter-key"/api_key: "${OPENROUTER_API_KEY}"/' sentient.yaml
+```
+```Bash
 sed -i 's/OPENROUTER_API_KEY=your_openrouter_key_here/OPENROUTER_API_KEY=sk_your_api_key_here/' .env
-🔑 Replace sk_your_api_key_here with your actual OpenRouter key.
+```
 
-🧬 7. Set Model ID
-Specify the AI model ROMA will use.
-This guide uses DeepSeek Chat V3.1 (Free) from OpenRouter:
-
-bash
-Copy code
+### ⚙️ Step 7 - Set Model ID (Recommended: DeepSeek Chat v3.1 Free)
+```Bash
 cd ~/ROMA/src/sentientresearchagent/hierarchical_agent_framework/agent_configs
 sed -i 's/model_id:.*".*"/model_id: "openrouter\/deepseek\/deepseek-chat-v3.1:free"/g' agents.yaml
-⚡ 8. Start ROMA Services
-bash
-Copy code
+```
+
+### ⚡ Step 8 - Start ROMA Services
+
+```Bash
 cd ~/ROMA/docker
 docker compose down
 docker compose up -d
 docker restart
-Wait 2–3 minutes for all containers to initialize.
+```
 
-🔍 9. Check Logs (Optional)
-You can verify that ROMA is running correctly with:
+Wait 2–3 minutes for everything to initialize.
 
+### 🧾 Step 9 - Check Logs (Optional)
+```Bash
 docker compose logs -f
-If everything is working, you’ll see logs showing active agents.
+```
+
+You’ll see logs indicating that ROMA services are active.
 Press Ctrl + C to exit.
 
-🌐 10. Launch ROMA Interface
+### 🌐 Step 10 - Launch ROMA Interface
+
 Open your browser and go to:
+```Bash
 👉 http://localhost:3000/
+```
+<img width="1897" height="940" alt="image" src="https://github.com/user-attachments/assets/74d65b4c-972b-4459-8f41-ddf42aaef24c" />
+You’re now ready to use Sentient ROMA locally 🎉
 
-You should now see the ROMA web interface and can start experimenting!
-👉 http://localhost:3000/
 
-You should now see the ROMA web interface and can start experimenting!
+
